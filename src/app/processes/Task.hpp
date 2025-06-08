@@ -22,7 +22,7 @@ struct Task {
 
 //this is a move constructor i.e. it takes a rvalue reference to a std::fstream object
 //it moves the object to the new Task object and then destroys the original object
-    Task(std::fstream  &&stream, Action act, std::string filePath) : f_stream(std::move(stream)), action(act), filePath(filePath) {} //this constructor takes multiple objects and assigns it to local variables
+    Task(std::fstream  &&stream, Action act, std::string filePath) : filePath(filePath), f_stream(std::move(stream)), action(act) {} //this constructor takes multiple objects and assigns it to local variables
 
     //method 2 
     // Task(std::fstream  &&stream, Action act, std::string filePath) {
@@ -33,7 +33,7 @@ struct Task {
 
     std::string toString(){
         std::ostringstream oss;
-        oss<<filePath<<","<<(action==Action.ENCRYPT?"ENCRYPT":"DECRYPT");
+        oss<<filePath<<","<<(action==Action::ENCRYPT?"ENCRYPT":"DECRYPT");
         return oss.str();
     }
 
@@ -45,7 +45,7 @@ struct Task {
         if(std::getline(iss,filePath,',') && std::getline(iss,actionStr)){
             Action action = (actionStr == "ENCRYPT") ? Action::ENCRYPT : Action::DECRYPT;
             IO io(filePath);
-            std::fstream f_stream = std::move(io.getFileStream());
+            std::fstream f_stream = io.getFileStream();
             if(f_stream.is_open()){
                 return Task(std::move(f_stream),action,filePath);
             }

@@ -2,13 +2,11 @@
 #include <string>
 #include <fstream>
 #include "IO.hpp"
-#include <string>
+#include "ReadEnv.hpp"
 #include <sstream>
 
-class ReadEnv{
-public:
-std::string getEnv(){
-    std:string env_path=".env";
+std::string ReadEnv::getEnv(){
+    std::string env_path=".env";
     IO io(env_path);
     std::fstream f_stream = io.getFileStream();
     std::stringstream buffer;
@@ -16,7 +14,6 @@ std::string getEnv(){
     std::string content = buffer.str(); //convert the buffer to a string 
     return content;
 }
-};
 
 
 

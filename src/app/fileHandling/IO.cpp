@@ -7,7 +7,7 @@ IO::IO(const std::string &filepath):file_stream(filepath){ //constructor impleme
 file_stream.open(filepath, std::ios::in | std::ios::out | std::ios::binary);  //open the file in read,write and binary mode 
 
     if(!file_stream.is_open()){
-        std::cout<<"Unable to open the file: "<<file_path<<std::endl;
+        std::cout<<"Unable to open the file: "<<filepath<<std::endl;
     }
 }
 

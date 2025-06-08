@@ -17,7 +17,7 @@ class IO{
     private:
     std::fstream file_stream;
 
-}
+};
 
 
 #endif 
